@@ -39,6 +39,50 @@ void debug(vs s) {cout << "#------------------#\n";}
 
 template<typename T> T LOG(T base, T power){return log2(power) / log2(base);}
 
+//--------- overloaded << operator to print stl containers.. cout << container << ln
+// for vector(1D, 2D), vector of pair & set....
+template<typename T>
+ostream& operator<< (ostream& out, const vector<T>& v) {
+    out << "[";
+    size_t last = v.size() - 1;
+    for (size_t i = 0; i < v.size(); ++i) {
+        out << v[i];
+        if (i != last)
+            out << ", ";
+    }
+    out << "]";
+    return out;
+}
+
+// for set & set of ....
+template <typename T> 
+ostream& operator<<(ostream& os, const set<T>& v){ 
+    os << "{"; 
+    for (auto it : v) { 
+        os << it; 
+        if (it != *v.rbegin()) 
+            os << ", "; 
+    } 
+    os << "}"; 
+    return os; 
+} 
+// for map, map of vector & .....
+template <typename T, typename S> 
+ostream& operator<<(ostream& os, const map<T, S>& v){ 
+    for (auto it : v)  
+        os << it.first << " : " 
+           << it.second << "\n"; 
+    return os; 
+}
+// for pair & pair of .......
+template <typename T, typename S> 
+ostream& operator<<(ostream& os, const pair<T, S>& v){ 
+    os << "("; 
+    os << v.first << ", " 
+       << v.second << ")"; 
+    return os; 
+}
+
 void solve() {
 
 } 
