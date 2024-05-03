@@ -20,19 +20,26 @@ typedef vector<ll> vl;
 #define up upper_bound
 
 void solve() {
+  int n, m, k; cin >> n >> m >> k;
+  
+ // n is how many parts of the ribbon 
+ // m is how many colours of the ribbon 
+ // k is how many parts can be destroyed 
+  
+  // if name colours -1 is not bigger than num of deletions then fail
+  if (k >= n - 1) {
+    cout << "YES";
+  } else {
+  
+    cout << (m > 1 ? "YES" : "NO");
+  }
+  
 
 } 
 
 int main() {
-  #ifndef ONLINE_JUDGE
-		//freopen("generator.txt", "r", stdin);
-		freopen("input.txt", "r", stdin);
-		freopen("output.txt", "w", stdout);
-		freopen("error.txt", "w", stderr);
-	#endif
-
   int T = 1;
-  cin >> T;
+  cin >> T;   
   while (T--) {
     solve();
   }

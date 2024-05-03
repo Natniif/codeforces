@@ -8,7 +8,8 @@ def add_include(filename):
         os.makedirs(new_file)
 
     filepath = os.path.join(new_file, filename + ".cpp")
-
+    filepath_input = os.path.join(new_file, "input.txt")
+        
     if os.path.exists(filepath): 
         print("File already exists")
         return
@@ -22,7 +23,9 @@ def add_include(filename):
 
     with open(filepath, "w") as f: 
         f.write(contents)
-        
+
+    with open(filepath_input, "w") as f:
+        f.write()
 
     print(f"Template folder created for problem {filename} in ./problems directory")
 
