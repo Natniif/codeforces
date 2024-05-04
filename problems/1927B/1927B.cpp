@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <unordered_map>
 
 using namespace std;
 
@@ -84,7 +85,39 @@ ostream& operator<<(ostream& os, const pair<T, S>& v){
 }
 
 void solve() {
+  vi nums; 
+  int n; 
+  cin >> n;
+  while (n--) {
+    int i; cin >> i;
+    nums.push_back(i);
+  }
 
+
+  unordered_map<char, int> hmap;
+  char current = 'a';
+  FOR(i, 0, nums.size()) {
+    if (nums[i] == 0) {
+      cout << current;
+      // add to hashmap
+      hmap[current]++;
+      // increment current
+      current++;
+    }
+    else {
+      // if hit a number greater than 0 access that character from hmap and increment
+      for (auto itr : hmap) {
+        if (itr.second == nums[i]) {
+          cout << char(itr.first);
+          hmap[itr.first]++;
+          break;
+        }
+      }
+    }
+  }
+  
+  cout << ln;
+  
 } 
 
 int main() {
