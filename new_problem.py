@@ -25,7 +25,7 @@ def add_include(filename):
         f.write(contents)
 
     with open(filepath_input, "w") as f:
-        f.write()
+        f.write("")
 
     print(f"Template folder created for problem {filename} in ./problems directory")
 
