@@ -83,73 +83,39 @@ ostream& operator<<(ostream& os, const pair<T, S>& v){
     return os; 
 }
 
-int highest_bit_position(int value) {
-    int pos = 0;
-    while (value > 0) {
-        value >>= 1;
-        pos++;
-    }
-    return pos - 1; // zero-based position
+std::string rearrangeAndRemoveDuplicates(const std::string& input) {
+    // Create a set to remove duplicates
+    std::set<char> uniqueChars(input.begin(), input.end());
+    
+    // Convert the set back to a string
+    std::string result(uniqueChars.begin(), uniqueChars.end());
+    
+    // Sort the string
+    std::sort(result.begin(), result.end());
+    
+    return result;
+}
+
+int opposite(string r, string word, int index_of_word) {
+    char letter = word[index_of_word];
+    size_t indx = r.find(letter);
+    return r.size() - 1 - indx;
 }
 
 void solve() {
     int n; cin >> n;
+    string word; cin >> word;
 
-    vi a(n);
+    string new_word;
+
+    // c d e f o r s 
+    string r = rearrangeAndRemoveDuplicates(word);
     FOR(i, 0, n) {
-        cin >> a[i];
+        int opp_ind = opposite(r, word, i);
+        new_word.push_back(r[opp_ind]);
     }
 
-    int max_value = *std::max_element(a.begin(), a.end());
-    int max_bit_pos = highest_bit_position(max_value);
-
-    int first_occurrence_index = -1;
-    for (int i = 0; i < n; ++i) {
-        if ((a[i] & (1 << max_bit_pos)) != 0) {
-            first_occurrence_index = i;
-            break;
-        }
-    }
-
-    int k = (first_occurrence_index > 0) ? first_occurrence_index : 1;
-
-    auto lowest = min(a.begin(), a.end()); 
-    
-    int min_index = distance(a.begin(), lowest);
-
-    k = k - min_index;
-
-    while (true) {
-        int match = 0; 
-        FOR(i, 0, k) {
-            match |= a[i];
-        }
-
-        int matched = true;
-
-        FOR(i, 0, n-k + 1) {
-            int left = 0;
-            FOR(j, i, i + k) {
-                left |= a[j];
-            }
-
-            if (left != match) {
-                matched = false;
-                break;
-            }
-        }
-
-        if (matched) {
-            cout << k << ln;
-            return;
-        }
-
-        k++;
-        if (k >= n) {
-            cout << k << ln;
-            return;
-        }
-    }
+    cout << new_word << ln;
 
 } 
 
